@@ -2,18 +2,26 @@ const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
-
+  
   if (!token) {
-    return res.status(403).json({ message: 'Доступ запрещен' });
+    return res.status(403).json({ message: 'Требуется авторизация' });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;  // Декодированные данные пользователя
+    req.user = decoded;
     next();
-  } catch (err) {
+  } catch (error) {
     return res.status(401).json({ message: 'Неверный токен' });
   }
 };
 
-module.exports = authMiddleware;
+// Middleware для проверки роли администратора
+const adminMiddleware = (req, res, next) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Доступ запрещен' });
+  }
+  next();
+};
+
+module.exports = { authMiddleware, adminMiddleware };

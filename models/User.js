@@ -11,6 +11,10 @@ const User = db.define('User', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,  // По умолчанию пользователь не админ
+  },
 });
 
 module.exports = User;
