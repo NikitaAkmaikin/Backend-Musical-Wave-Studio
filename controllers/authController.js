@@ -2,9 +2,24 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+// Регулярное выражение для проверки email
+const validateEmail = (email) => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+};
+
 // Функция регистрации
 exports.register = async (req, res) => {
   const { email, password } = req.body;
+
+  // Шаг 1: Валидация входных данных
+  if (!email || !validateEmail(email)) {
+    return res.status(400).json({ message: 'Некорректный email' });
+  }
+
+  if (!password || password.length < 6) {
+    return res.status(400).json({ message: 'Пароль должен содержать минимум 6 символов' });
+  }
 
   try {
     const existingUser = await User.findOne({ where: { email } });
@@ -36,6 +51,15 @@ exports.register = async (req, res) => {
 // Функция входа
 exports.login = async (req, res) => {
   const { email, password } = req.body;
+
+  // Шаг 1: Валидация входных данных
+  if (!email || !validateEmail(email)) {
+    return res.status(400).json({ message: 'Некорректный email' });
+  }
+
+  if (!password) {
+    return res.status(400).json({ message: 'Пароль обязателен' });
+  }
 
   try {
     const user = await User.findOne({ where: { email } });

@@ -30,7 +30,7 @@ app.use('/api', contactRoutes);
 // Подключение к базе данных и запуск сервера
 (async () => {
   try {
-    await db.sync({ alter: true });  // Обновляет структуру таблиц в соответствии с моделями
+    await db.sync({ alter: true });
     console.log('База данных синхронизирована');
     
     app.listen(5000, () => {
