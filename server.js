@@ -38,7 +38,7 @@ app.use('/api', contactRoutes);
     await db.sync({ alter: true });
     console.log('База данных синхронизирована');
     
-    app.listen(5000, '0.0.0.0', () => {
+    app.listen(5000, '::', () => {
       console.log('Сервер запущен на порту 5000');
     });
     
