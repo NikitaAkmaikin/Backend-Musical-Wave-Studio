@@ -23,7 +23,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Подключение маршрутов
 app.use('/api/auth', authRoutes);
-app.use('/api/music-directions', musicRoutes);
+// app.use('/api/music-directions', musicRoutes);
+app.use('/api/music-directions', (req, res, next) => {
+  console.log('Received request for /api/music-directions');
+  next();
+}, musicRoutes);
+
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api', contactRoutes);
 
