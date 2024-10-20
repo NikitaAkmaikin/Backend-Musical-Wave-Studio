@@ -1,7 +1,3 @@
-// В начале файла добавь проверочный маршрут
-router.get('/test', (req, res) => {
-  res.json({ message: 'Test route works!' });
-});
 
 const express = require('express');
 const path = require('path');
@@ -9,6 +5,10 @@ const { getMusicDirections, createMusicDirection, deleteMusicDirection } = requi
 const router = express.Router();
 const multer = require('multer');
 
+// В начале файла добавь проверочный маршрут
+router.get('/test', (req, res) => {
+  res.json({ message: 'Test route works!' });
+});
 // Настраиваем multer для загрузки файлов
 const upload = multer({ storage: multer.diskStorage({
   destination: 'uploads/',
