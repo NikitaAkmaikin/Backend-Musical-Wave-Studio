@@ -12,7 +12,7 @@ const app = express();
 
 // Настройка CORS
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://90.156.170.115'],
+  origin: 'http://90.156.170.115',
 }));
 
 // Middleware для обработки JSON
