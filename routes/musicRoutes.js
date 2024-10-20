@@ -1,3 +1,8 @@
+// В начале файла добавь проверочный маршрут
+router.get('/test', (req, res) => {
+  res.json({ message: 'Test route works!' });
+});
+
 const express = require('express');
 const path = require('path');
 const { getMusicDirections, createMusicDirection, deleteMusicDirection } = require('../controllers/musicController');
