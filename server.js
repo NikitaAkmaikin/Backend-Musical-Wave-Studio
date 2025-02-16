@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 
 // Настройка CORS
 app.use(cors({
-  origin: 'http://90.156.170.115',
+  origin: 'http://localhost:5173', // origin: ['http://localhost:5173', 'http://90.156.170.115'],
 }));
 
 // Middleware для обработки JSON
@@ -27,7 +27,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Подключение маршрутов
 app.use('/api/auth', authRoutes);
-app.use('/api/music-directions', musicRoutes);
+app.use('/api/products', musicRoutes);
 
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api', contactRoutes);
